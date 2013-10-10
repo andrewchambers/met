@@ -381,22 +381,22 @@ void test_divu() {
 
 int main() {
     failed = 0;
-	outs("---- starting opcode tests ----");
-	T(test_add);
+    outs("---- starting opcode tests ----");
+    T(test_add);
     T(test_addi);
     T(test_div);
     T(test_divu);
     T(test_lb);
     T(test_lbu);
     T(test_lui);
-	T(test_lw);
-	T(test_lwl);
-	T(test_lwr);
-	T(test_ori);
-	T(test_sll);
+    T(test_lw);
+    T(test_lwl);
+    T(test_lwr);
+    T(test_ori);
+    T(test_sll);
     T(test_srl);
     T(test_xor);
     T(test_xori);
-	outs("\n---- finished opcode tests ----");
-	return failed;
+    outs("\n---- finished opcode tests ----");
+    return failed;
 }

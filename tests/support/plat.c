@@ -32,6 +32,7 @@ void power_down() {
 int main();
 
 void plat_main() {
+    setupExceptionHandler();
 	if (main() != 0 ) {
 	    outs("Test: " CURTEST " FAIL");
 	} else {

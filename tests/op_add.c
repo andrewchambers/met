@@ -16,6 +16,8 @@ int main() {
     ASSERT(add(0,0xff) == 0xff);
     ASSERT(add(1,0xff) == 0x100);
     ASSERT(add(0x123456,0x654321) == 7829367);
-    //Must test overflow
+    add(0x7fffffff,1);
+        
+    
     return 0;    
 }

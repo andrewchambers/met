@@ -1,4 +1,6 @@
 #! /usr/bin/python
+
+#note, this docstring is parsed by docopt so dont change it unless you are sure
 """
 Mips Emulator Tester.
 

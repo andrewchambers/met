@@ -6,3 +6,7 @@ int putchar (int c);
 void outs(const char * s);
 
 void outn(unsigned int n);
+
+void setupExceptionHandler();
+
+extern int lastExceptionCause;
