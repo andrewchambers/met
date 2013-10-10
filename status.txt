@@ -1,0 +1,103 @@
+Instruction
+-------------
+ADD - needs overflow test
+ADDI - needs overflow test
+ADDIU - tested
+ADDU - tested
+AND - tested
+ANDI - tested
+BEQ - tested
+BEQL - tested
+BGEZ - tested
+BGEZAL
+BGEZALL
+BGEZL - tested
+BGTZ - tested
+BGTZL - tested
+BLEZ
+BLEZL
+BLTZ
+BLTZAL
+BLTZALL
+BLTZL
+BNE
+BNEL
+BREAK
+CACHE
+CLO
+CLZ
+DIV
+DIVU
+ERET
+J
+JAL
+JALR
+JR
+LB
+LBU
+LH
+LHU
+LL
+LUI
+LW
+LWL
+LWR
+MADD
+MADDU
+MFC0
+MFHI
+MFLO
+MOVN
+MOVZ
+MSUB
+MSUBU
+MTC0
+MTHI
+MTLO
+MUL
+MULT
+MULTU
+NOR
+OR
+ORI
+PREF
+SB
+SC
+SH
+SLL
+SLLV
+SLT
+SLTI
+SLTIU
+SRA
+SRAV
+SRL
+SRLV
+SUB
+SUBU
+SW
+SWL
+SWR
+SYNC
+SYSCALL
+TEQ
+TEQI
+TGE
+TGEI
+TGEIU
+TGEU
+TLBP
+TLBR
+TLBWI
+TLBWR
+TLT
+TLTI
+TLTIU
+TLTU
+TNE
+TNEI
+WAIT
+XOR - tested
+XORI
+
+XXX all branches need negative offset tests added...
