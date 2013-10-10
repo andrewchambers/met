@@ -26,7 +26,7 @@ def main():
     if args['build']:
         builder.build_tests(verbose=args['--verbose'],force=args['--force'])
     elif args['run']:
-        runner.run_tests(command=args['EMU'],verbose=args['--verbose'])
+        runner.run_tests(command=args['EMU'],verbose=args['--verbose'],srec=args['--srec'])
     else:
         print __doc__
     endt = time.time()

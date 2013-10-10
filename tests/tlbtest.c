@@ -80,6 +80,7 @@ void clearERL() {
 
 int main()
 {
+    outs("test start");
     //set up 4k pages
     setPageMask(0);
     
@@ -97,8 +98,9 @@ int main()
     unsigned int * pv = (unsigned int *)addr;
     *pv = 0xdeadbeef;
     
-    unsigned int * px = (unsigned int *)(addr - 0x80000000);
+    unsigned int * px = (unsigned int *)(addr - 0xa0000000);
     
+    outs("writing to address via direct access");
     if(*px != 0xdeadbeef) {
         outs("direct access with erl set failed!");
         return 1;
@@ -107,8 +109,8 @@ int main()
     
     writeTLBIndex(0);// select index 0 in tlb
     writeEntryHi(0,0); // we are mapping first and second onto the same physical as addr
-    writeEntryLo(0,getPageNumber(addr - 0x80000000),2,1,1,1);
-    writeEntryLo(1,getPageNumber(addr - 0x80000000),2,1,1,1);
+    writeEntryLo(0,getPageNumber(addr - 0xa0000000),2,1,1,1);
+    writeEntryLo(1,getPageNumber(addr - 0xa0000000),2,1,1,1);
     writeTLBWithIndex();    
     
     outs("configured tlb.");

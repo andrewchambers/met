@@ -33,9 +33,9 @@ int main();
 
 void plat_main() {
 	if (main() != 0 ) {
-	    outs("test: " CURTEST " FAIL");
+	    outs("Test: " CURTEST " FAIL");
 	} else {
-	    outs("test: " CURTEST " PASS");
+	    outs("Test: " CURTEST " PASS");
 	}
 	power_down();
 }

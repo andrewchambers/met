@@ -98,7 +98,7 @@ void test_lwr() {
 	x = 0;
 	asm("lwr %0, 0(%1)\n" : "=r"(x) : "r"(p));
 	
-	if ( x != 0x82ffff11) {
+	if ( x != 0xa2ffff11) {
 	    outn(x);
 		FAIL;
 	}
@@ -106,7 +106,7 @@ void test_lwr() {
 	x = 0;
 	asm("lwr %0, 1(%1)\n" : "=r"(x) : "r"(p));
 	
-	if ( x != 0x82ff1122) {
+	if ( x != 0xa2ff1122) {
 		outn(x);
 		FAIL;
 	}
@@ -114,7 +114,7 @@ void test_lwr() {
     x = 0;
 	asm("lwr %0, 2(%1)\n" : "=r"(x) : "r"(p));
 	
-	if ( x != 0x82112233) {
+	if ( x != 0xa2112233) {
 		outn(x);
 		FAIL;
 	}
