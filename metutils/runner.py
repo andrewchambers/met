@@ -33,7 +33,6 @@ def run_tests(command=None,verbose=False,srec=False):
         tests.sort()
         #rerun failed tests only
         if len(prevfailed):
-            fdsfds
             tests = [x for x in tests if x in prevfailed]
         ntests = len(tests)
         for t in tests:
