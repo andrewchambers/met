@@ -58,7 +58,7 @@ MUL
 MULT
 MULTU
 NOR
-OR
+OR - tested
 ORI
 PREF
 SB
