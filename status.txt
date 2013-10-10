@@ -14,31 +14,31 @@ BGEZALL
 BGEZL - tested
 BGTZ - tested
 BGTZL - tested
-BLEZ
-BLEZL
-BLTZ
+BLEZ - tested
+BLEZL -tested
+BLTZ - tested
 BLTZAL
 BLTZALL
 BLTZL
-BNE
+BNE - tested
 BNEL
 BREAK
 CACHE
 CLO
 CLZ
-DIV
-DIVU
+DIV - tested
+DIVU - tested
 ERET
 J
 JAL
 JALR
-JR
+JR - tested XXX test unaligned?
 LB
 LBU
 LH
 LHU
 LL
-LUI
+LUI - tested
 LW
 LWL
 LWR
@@ -57,7 +57,7 @@ MTLO
 MUL
 MULT
 MULTU
-NOR
+NOR - tested
 OR - tested
 ORI
 PREF
