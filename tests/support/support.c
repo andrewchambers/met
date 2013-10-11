@@ -65,6 +65,8 @@ extern void ehandler(); // type not so important, we just want its address
 
 void setupExceptionHandler() {
     //XXX for now disable BEV and use normal exception vectors
+    //Disabled totally
+    return;
     unsigned int oldstatus,newstatus;
     asm("mfc0 %0, $12\n" :"=r"(oldstatus)::);
     newstatus = oldstatus & ~(1 << 22);

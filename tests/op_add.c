@@ -3,6 +3,7 @@
 static inline unsigned int add(unsigned int a,unsigned int b) {
     unsigned int ret;
     asm("add %0,%1,%2\n" :"=r"(ret) :"r"(a) , "r"(b):  );
+    return ret;
 }
 
 
@@ -15,9 +16,7 @@ int main() {
     ASSERT(add(0,0) == 0);
     ASSERT(add(0,0xff) == 0xff);
     ASSERT(add(1,0xff) == 0x100);
-    ASSERT(add(0x123456,0x654321) == 7829367);
-    add(0x7fffffff,1);
-        
+    ASSERT(add(0x123456,0x654321) == 7829367);        
     
     return 0;    
 }

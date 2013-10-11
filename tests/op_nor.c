@@ -5,6 +5,7 @@
 static inline unsigned int nor(unsigned int a,unsigned int b) {
     unsigned int ret;
     asm("nor %0,%1,%2\n" :"=r"(ret) :"r"(a) , "r"(b):  );
+    return ret;
 }
 
 

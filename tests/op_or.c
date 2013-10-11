@@ -5,6 +5,7 @@
 static inline unsigned int or(unsigned int a,unsigned int b) {
     unsigned int ret;
     asm("or %0,%1,%2\n" :"=r"(ret) :"r"(a) , "r"(b):  );
+    return ret;
 }
 
 

@@ -5,6 +5,7 @@
 static inline unsigned int xor(unsigned int a,unsigned int b) {
     unsigned int ret;
     asm("xor %0,%1,%2\n" :"=r"(ret) :"r"(a) , "r"(b):  );
+    return ret;
 }
 
 

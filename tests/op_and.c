@@ -5,6 +5,7 @@
 static inline unsigned int and(unsigned int a,unsigned int b) {
     unsigned int ret;
     asm("and %0,%1,%2\n" :"=r"(ret) :"r"(a) , "r"(b):  );
+    return ret;
 }
 
 

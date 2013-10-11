@@ -21,7 +21,7 @@ BLTZAL
 BLTZALL
 BLTZL
 BNE - tested
-BNEL
+BNEL -tested
 BREAK
 CACHE
 CLO
@@ -29,10 +29,10 @@ CLZ
 DIV - tested
 DIVU - tested
 ERET
-J
+J - tested
 JAL
 JALR
-JR - tested XXX test unaligned?
+JR - tested
 LB
 LBU
 LH
@@ -64,8 +64,8 @@ PREF
 SB
 SC
 SH
-SLL
-SLLV
+SLL - tested
+SLLV - tested
 SLT
 SLTI
 SLTIU
@@ -98,6 +98,6 @@ TNE
 TNEI
 WAIT
 XOR - tested
-XORI
+XORI - tested
 
 XXX all branches need negative offset tests added...
