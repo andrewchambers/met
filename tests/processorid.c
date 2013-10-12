@@ -16,5 +16,20 @@ int main() {
         return 1;
     }
     
+    asm("mfc0 %0,$16, 1\n" : "=r" (out) ::);
+    
+    
+    if (out != 0x9e190c8a && out != 0x1e190c8a) {
+        outn(out);
+        return 1;
+    }
+    
+    asm("mfc0 %0,$13\n" : "=r" (out) ::);
+    
+    if (out != 0 ) {
+        outn(out);
+        return 1;
+    }    
+    
     return 0;
 }
