@@ -55,7 +55,7 @@ void writeJump(void * jmpTarget,void * jmpPc) {
     unsigned int jPc = (unsigned int) jmpPc;
     
     unsigned int opcode = (1 << 27) | ((jTarget - jPc) & 0x3ffffff);
-    *((unsigned int*) jmpPc) =  0x42000018;//opcode; //ERET
+    *((unsigned int*) jmpPc) =  opcode;
     
     outn(*((unsigned int*) jmpPc));
     outs("");
@@ -64,12 +64,10 @@ void writeJump(void * jmpTarget,void * jmpPc) {
 extern void ehandler(); // type not so important, we just want its address
 
 void setupExceptionHandler() {
-    //XXX for now disable BEV and use normal exception vectors
     //Disabled totally
-    return;
     unsigned int oldstatus,newstatus;
     asm("mfc0 %0, $12\n" :"=r"(oldstatus)::);
-    newstatus = oldstatus & ~(1 << 22);
+    newstatus = oldstatus & ~(1 << 22); //disable bev
     asm("mtc0 %0, $12\n" ::"r"(newstatus):);
     writeJump((void*)&ehandler,(void*)0x80000000);
     writeJump((void*)&ehandler,(void*)(0x80000000 + 0x180));
