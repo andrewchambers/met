@@ -23,7 +23,16 @@ unsigned int getStatusReg() {
     return ret;
 }
 
+void timerIntHandler() {
+    
+}
+
+
 void init() {
+    
+    
+    registerExceptionHandler(&timerIntHandler);    
+    
     unsigned int oldstatus,newstatus;
     
     setCompareReg(0x00100000);
@@ -40,6 +49,9 @@ void init() {
 }
 
 
+
+
+
 int main() {
     
     init();
@@ -47,7 +59,7 @@ int main() {
     while(1) {
         //wait for timer interrupt to occur.
         outn(getCountReg()); outs("");
-        outs("status: "); outn(getStatusReg()); outs("");
+        //outs("status: "); outn(getStatusReg()); outs("");
     }   
     
     

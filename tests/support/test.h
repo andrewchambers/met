@@ -9,4 +9,4 @@ void outn(unsigned int n);
 
 void setupExceptionHandler();
 
-extern int lastExceptionCause;
+void registerExceptionHandler(void (*handler)());

@@ -51,15 +51,31 @@ void abort(void) {
 void writeJump(void * jmpTarget,void * jmpPc) {
     
     outs("writing jump handlers");
-    unsigned int jTarget = (unsigned int) jmpTarget;
+    int jTarget = (unsigned int) jmpTarget;
+    outn(jTarget); outs("");
     unsigned int jPc = (unsigned int) jmpPc;
     
-    unsigned int opcode = (1 << 27) | ((jTarget - jPc) & 0x3ffffff);
+    unsigned int opcode = (1 << 27) | ((jTarget & 0xfffffff) >> 2 );
     *((unsigned int*) jmpPc) =  opcode;
     
-    outn(*((unsigned int*) jmpPc));
+    outn(opcode);
     outs("");
 }
+
+
+void (*registeredHandler)() = 0;
+
+void registerExceptionHandler(void (*handler)()) {
+    registeredHandler = handler;
+}
+
+void support_exception_handler() {
+    if(registeredHandler) {
+        registeredHandler();
+    }
+    return;
+}
+
 
 extern void ehandler(); // type not so important, we just want its address
 
