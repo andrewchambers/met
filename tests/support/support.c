@@ -50,16 +50,12 @@ void abort(void) {
 
 void writeJump(void * jmpTarget,void * jmpPc) {
     
-    outs("writing jump handlers");
     int jTarget = (unsigned int) jmpTarget;
-    outn(jTarget); outs("");
     unsigned int jPc = (unsigned int) jmpPc;
     
     unsigned int opcode = (1 << 27) | ((jTarget & 0xfffffff) >> 2 );
     *((unsigned int*) jmpPc) =  opcode;
     
-    outn(opcode);
-    outs("");
 }
 
 
@@ -77,7 +73,7 @@ void support_exception_handler() {
 }
 
 
-extern void ehandler(); // type not so important, we just want its address
+extern void ___ehandler(); // type not so important, we just want its address
 
 void setupExceptionHandler() {
     //Disabled totally
@@ -85,9 +81,9 @@ void setupExceptionHandler() {
     asm("mfc0 %0, $12\n" :"=r"(oldstatus)::);
     newstatus = oldstatus & ~(1 << 22); //disable bev
     asm("mtc0 %0, $12\n" ::"r"(newstatus):);
-    writeJump((void*)&ehandler,(void*)0x80000000);
-    writeJump((void*)&ehandler,(void*)(0x80000000 + 0x180));
-    writeJump((void*)&ehandler,(void*)(0x80000000 + 0x200));
+    writeJump((void*)&___ehandler,(void*)0x80000000);
+    writeJump((void*)&___ehandler,(void*)(0x80000000 + 0x180));
+    writeJump((void*)&___ehandler,(void*)(0x80000000 + 0x200));
     //writeJump((void*)&ehandler,(void*)0xBFC00200);
     //writeJump((void*)&ehandler,(void*)(0xBFC00200 + 0x180));
     //writeJump((void*)&ehandler,(void*)(0xBFC00200 + 0x200));

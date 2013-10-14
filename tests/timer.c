@@ -23,7 +23,36 @@ unsigned int getStatusReg() {
     return ret;
 }
 
+void setStatusReg(int status) {
+    asm("mtc0 %0, $12\n" ::"r"(status):);
+}
+
+
+volatile int timerInterruptOccured = 0;
+
+volatile int timerInterruptCounter = 0;
+
+
 void timerIntHandler() {
+
+    if(timerInterruptCounter >= 1) {
+        timerInterruptOccured = 1;
+        unsigned int oldstatus;
+        
+        oldstatus = getStatusReg();
+        
+        setCompareReg(0x10); // now timer interrupts should be frequent
+                             // in case something is broken
+        //clear interrupt enable
+        setStatusReg(oldstatus & (~1));
+        
+        
+    } else {
+        //test ignoring the first timer interrupt and having it reraised
+        timerInterruptCounter += 1;
+    }
+    
+    
     
 }
 
@@ -44,7 +73,7 @@ void init() {
     newstatus |= (1 << 15); //interrupt mask for timer
     newstatus |= 1; // interrupts enabled
     
-    asm("mtc0 %0, $12\n" ::"r"(newstatus):);
+    setStatusReg(newstatus);
     
 }
 
@@ -57,10 +86,19 @@ int main() {
     init();
     
     while(1) {
-        //wait for timer interrupt to occur.
-        outn(getCountReg()); outs("");
-        //outs("status: "); outn(getStatusReg()); outs("");
-    }   
+        if(timerInterruptOccured) {
+            break;
+        }
+    }
+    
+    timerInterruptOccured = 0;
+    
+    int i;
+    for(i = 0; i < 1000; i+= 1) {
+        if(timerInterruptOccured) {
+            return 1;
+        }
+    }
     
     
     return 0;

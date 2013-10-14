@@ -2,8 +2,8 @@
 .extern support_exception_handler
 
 
-.global ehandler
-ehandler:
+.global ___ehandler
+___ehandler:
     addiu $sp,-120
     #sw  $at,0($sp)
     sw  $v0,4($sp)
