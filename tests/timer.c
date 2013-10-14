@@ -23,8 +23,22 @@ unsigned int getStatusReg() {
     return ret;
 }
 
+
+unsigned int getEpcReg() {
+    unsigned int ret;
+    asm("mfc0 %0, $14\n" :"=r"(ret)::);
+    return ret;
+}
+
 void setStatusReg(int status) {
     asm("mtc0 %0, $12\n" ::"r"(status):);
+}
+
+
+unsigned int getCauseReg() {
+    unsigned int ret;
+    asm("mfc0 %0, $13\n" :"=r"(ret)::);
+    return ret;
 }
 
 
@@ -34,6 +48,23 @@ volatile int timerInterruptCounter = 0;
 
 
 void timerIntHandler() {
+    
+    outs("timer interrupt!");
+
+    int cause = getCauseReg();
+   
+    if ( (cause & 0x7f) != 0 ) {
+        outs("aborting exception cause not an external interrupt epc:");
+        outn(getEpcReg());
+        outs("");
+        abort();
+    }
+   
+    
+    if( (cause & (1 << 15))  == 0  ) {
+        outs("aborting bad cause values...");
+        abort();
+    }
 
     if(timerInterruptCounter >= 1) {
         timerInterruptOccured = 1;
@@ -59,11 +90,12 @@ void timerIntHandler() {
 
 void init() {
     
-    
+    outs("registering exception handler");
     registerExceptionHandler(&timerIntHandler);    
     
     unsigned int oldstatus,newstatus;
     
+    outs("setting up timer");
     setCompareReg(0x00100000);
     setCountReg(0);
     
@@ -73,7 +105,9 @@ void init() {
     newstatus |= (1 << 15); //interrupt mask for timer
     newstatus |= 1; // interrupts enabled
     
+    outs("enabling interrupts");
     setStatusReg(newstatus);
+    outs("init finished");
     
 }
 
@@ -83,8 +117,10 @@ void init() {
 
 int main() {
     
+    outs("init of timer interrupt");
     init();
     
+    outs("waiting for timer interrupt to occur");
     while(1) {
         if(timerInterruptOccured) {
             break;
