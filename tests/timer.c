@@ -54,7 +54,7 @@ void timerIntHandler() {
     int cause = getCauseReg();
    
     if ( (cause & 0x7f) != 0 ) {
-        outs("aborting exception cause not an external interrupt epc:");
+        outs("aborting: exception cause not an external interrupt epc:");
         outn(getEpcReg());
         outs("");
         abort();
@@ -62,11 +62,12 @@ void timerIntHandler() {
    
     
     if( (cause & (1 << 15))  == 0  ) {
-        outs("aborting bad cause values...");
+        outs("aborting: bad cause values...");
         abort();
     }
 
     if(timerInterruptCounter >= 1) {
+        outs("second timer int");
         timerInterruptOccured = 1;
         unsigned int oldstatus;
         
@@ -79,6 +80,7 @@ void timerIntHandler() {
         
         
     } else {
+        outs("first timer int");
         //test ignoring the first timer interrupt and having it reraised
         timerInterruptCounter += 1;
     }
@@ -123,15 +125,19 @@ int main() {
     outs("waiting for timer interrupt to occur");
     while(1) {
         if(timerInterruptOccured) {
+            outs("leaving loop");
             break;
         }
     }
+    
+    outs("timer interrupt occured");
     
     timerInterruptOccured = 0;
     
     int i;
     for(i = 0; i < 1000; i+= 1) {
         if(timerInterruptOccured) {
+            outs("unexpected timer interrupt!");
             return 1;
         }
     }
