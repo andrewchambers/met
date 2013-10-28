@@ -73,10 +73,20 @@ void timerIntHandler() {
         
         oldstatus = getStatusReg();
         
+                //clear interrupt enable
+        setStatusReg(oldstatus & (~1));
+        
+        if(!(getCauseReg() & 0x8000)) {
+            abort();
+        }
         setCompareReg(0x10); // now timer interrupts should be frequent
                              // in case something is broken
-        //clear interrupt enable
-        setStatusReg(oldstatus & (~1));
+        //better clear cause reg
+        if(getCauseReg() & 0x8000) {
+            outs("cause reg not cleared with compare write");
+            abort();
+        }
+        
         
         
     } else {
